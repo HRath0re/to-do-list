@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do-List</title>
+  <style>
+    /* css */
+    body{
+      background-color: rgb(175, 160, 175);
+      display: flex;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .list{
+      background-color: rgb(212, 149, 47);
+      padding : 25px;
+      border-radius: 10px;
+      width: 300px;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .intro{
+      font-size: 24px;
+      font-weight: bold;
+      background-color: rgb(253, 253, 5);
+      padding : 15px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .done{
+      border :white;
+      color : rgb(249, 247, 247);
+      background-color: black;
+      padding : 5px;
+      border-radius: 8px;
+    }
+
+    .priority{
+      border :white;
+      color : rgb(249, 247, 247);
+      background-color: darkred;
+      padding : 5px;
+      border-radius: 8px;
+    }
+
+    .addbtn{
+      border :none;
+      color : whitesmoke;
+      background-color: black;
+      padding : 8px;
+      border-radius: 8px;
+    }
+    
+    .input-field{
+      padding : 10px;
+      border-radius: 8px;
+      width: 250px;
+    }
+
+    .litem{
+      padding : 8px;
+      background-color: rgb(217, 220, 212);
+      border-radius: 8px;
+    }
+
+    .prioritized{
+      background-color: red;
+    }
+
+  </style>
+</head>
+<body>
+  <div class='main_div'>
+  <div><p class="intro">To-Do-List</p></div>
+  <div>
+    <p>
+      <input id="itemInput" type="text" class='input-field' placeholder="Enter task" onkeydown="if (event.key === 'Enter') {
+          play();
+        }">
+
+      <button id="addBtn" class='addbtn'
+        onclick="play();"
+      >Add</button>
+    </p>
+  </div>
+  
+  <div class="list-container">
+    <p>
+      <ul id="myList" class="list"></ul>
+    </p>
+  </div>
+  </div>
+  
+  <script>
+    let flag=JSON.parse(localStorage.getItem('flag')) || 0;
+    let content=JSON.parse(localStorage.getItem('content')) || '';
+    document.querySelector('.list').innerHTML=content;
+
+    function play(){
+      const inputElem=document.querySelector('.input-field');
+      const list=document.querySelector('.list');
+      const list_contents=list.innerHTML;
+
+      const text = inputElem.value.trim();
+      
+      if (!text) return;              // ignore empty
+      else flag++;
+      
+      list.innerHTML=list_contents + `<div class='list_elem${flag}'><li class='list_item'> ${text} &emsp;&emsp;&emsp; <button class='priority' onclick="prior('.list_elem${flag}');">prioritize</button>&emsp;<button class='done' onclick="del('.list_elem${flag}','.br${flag}');">Done</button></li></div><br class='br${flag}'>`;   // update visible list
+      
+      
+      document.querySelector(`.list_elem${flag}`).classList.add('litem');
+      content=list.innerHTML;
+      localStorage.setItem('content',JSON.stringify(content));  // store in local storage
+      localStorage.setItem('flag',JSON.stringify(flag));
+      document.getElementById("itemInput").value = "";  //or document.querySelector('.input-field').value='';
+      inputElem.focus();
+    }
+
+    function del(ele,br_tag){
+      const list=document.querySelector('.list');
+      const list_contents=list.innerHTML;
+      document.querySelector(ele).remove();
+      document.querySelector(br_tag).remove();
+      localStorage.setItem('content',JSON.stringify(list.innerHTML));  // store in local storage
+      localStorage.setItem('flag',JSON.stringify(flag));
+
+    }
+    
+    function prior(ele){
+      if(!document.querySelector(ele).classList.contains('prioritized')){
+        document.querySelector(ele).classList.add('prioritized');
+      }else{
+        document.querySelector(ele).classList.remove('prioritized');
+      }
+      const list=document.querySelector('.list');
+      localStorage.setItem('content',JSON.stringify(list.innerHTML));  // store in local storage
+    }
+
+  </script>
+</body>
+</html>
