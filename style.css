@@ -1,0 +1,67 @@
+/* css */
+    body{
+      background-color: rgb(175, 160, 175);
+      display: flex;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .list{
+      background-color: rgb(212, 149, 47);
+      padding : 25px;
+      border-radius: 10px;
+      width: 300px;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .intro{
+      font-size: 24px;
+      font-weight: bold;
+      background-color: rgb(253, 253, 5);
+      padding : 15px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .done{
+      border :white;
+      color : rgb(249, 247, 247);
+      background-color: black;
+      padding : 5px;
+      border-radius: 8px;
+    }
+
+    .priority{
+      border :white;
+      color : rgb(249, 247, 247);
+      background-color: darkred;
+      padding : 5px;
+      border-radius: 8px;
+    }
+
+    .addbtn{
+      border :none;
+      color : whitesmoke;
+      background-color: black;
+      padding : 8px;
+      border-radius: 8px;
+    }
+    
+    .input-field{
+      padding : 10px;
+      border-radius: 8px;
+      width: 250px;
+    }
+
+    .litem{
+      padding : 8px;
+      background-color: rgb(217, 220, 212);
+      border-radius: 8px;
+    }
+
+    .prioritized{
+      background-color: rgb(239, 47, 47);
+    }
